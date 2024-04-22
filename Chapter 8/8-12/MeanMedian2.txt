@@ -1,0 +1,45 @@
+// Write your code here
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class MeanMedian2{
+    public static void main(String[] args){
+        final int MAX=21;
+        Scanner in = new Scanner(System.in);
+        int[] inputs = new int[MAX];
+
+        int num = 0;
+        int size=0;
+        for(int i=0;i<MAX;i++){
+            System.out.printf("Enter number %d or 9999 to quit >> ",i+1);
+            num=in.nextInt();
+            size=i;
+            if (num==9999){
+                break;
+            }else{
+                inputs[i]=num;
+            }
+        }
+        System.out.printf("size is %d%n",size);
+        System.out.print("You entered : ");
+        for(int i=0;i<size;i++){
+            if(i==size-1){
+                System.out.printf("%d%n",inputs[i]);
+            }else{
+                System.out.printf("%d, ",inputs[i]);
+            }
+        }
+        Arrays.sort(inputs,0,size);
+        double mean = Arrays.stream(inputs,0,size).asDoubleStream().sum() / size;
+        double median = 0;
+        if (size % 2 == 0){
+            int mid = (int)(Math.floor(size / 2));
+            median = (inputs[mid-1] + inputs[mid]) / 2.0;
+        }else{
+            median = Math.floor((size / 2)+1);
+        }
+        System.out.printf("The mean is %.14f and the median is %.1f",mean,median);
+        // 190,  76,  82,  185,  145,  97,  178,  81
+        in.close();
+    }
+}
